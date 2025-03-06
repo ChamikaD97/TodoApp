@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, Text, View } from "react-native";
 import TodoItem from "./TodoItem";
 import { useSelector } from "react-redux";
-import { styles } from "../styles/styles"; // Import styles
+import { styles } from "../styles/stylesTodoList"; // Import styles
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos.todos);
