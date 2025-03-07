@@ -5,6 +5,10 @@ import {
   KeyboardAvoidingView,
   Platform,
   Animated,
+  View,
+  BackHandler,
+  Alert,
+  TouchableOpacity,
 } from "react-native";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
@@ -34,6 +38,26 @@ const App = () => {
     saveTodos(todos);
   }, [todos]);
 
+  // Function to handle app exit
+  const handleExit = () => {
+    Alert.alert(
+      "Exit App",
+      "Are you sure you want to exit?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Exit",
+          style: "destructive",
+          onPress: () => BackHandler.exitApp(),
+        },
+      ],
+      { cancelable: true }
+    );
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -47,6 +71,9 @@ const App = () => {
       </LinearGradient>
       <TaskInput />
       <TodoList />
+      <TouchableOpacity style={styles.exitButton} onPress={handleExit}>
+        <Text style={styles.exitButtonText}>Exit App</Text>
+      </TouchableOpacity>
     </KeyboardAvoidingView>
   );
 };
@@ -64,7 +91,6 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingBottom: 50,
-
     padding: 20,
     paddingTop: 50,
     alignItems: "center",
@@ -76,52 +102,26 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 28,
     fontWeight: "700",
-    alignSelf: "center",
     letterSpacing: 1,
   },
   sloganText: {
     color: "#fff",
-    alignSelf: "center",
     fontSize: 16,
     fontWeight: "500",
     marginTop: 5,
     fontStyle: "italic",
   },
-
-  inputContainer: {
-    flexDirection: "row",
+  exitButton: {
+    backgroundColor: "#e74c3c",
     padding: 15,
-    backgroundColor: "#fff",
     marginHorizontal: 20,
-    marginTop: -20, // Overlaps header slightly for a floating effect
+
+    marginVertical: 10,
     borderRadius: 15,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    elevation: 8,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    padding: 12,
-    borderRadius: 10,
-    backgroundColor: "#f8f9fa",
-    marginRight: 10,
-    color: "#333",
-  },
-  addButton: {
-    borderRadius: 10,
-    overflow: "hidden",
-  },
-  disabledButton: {
-    opacity: 0.5,
-  },
-  addButtonGradient: {
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-  },
-  addButtonText: {
+  exitButtonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "600",
