@@ -33,6 +33,8 @@ const TaskInput = () => {
       saveTodos(todos);
     }, [todos]);
   
+
+     // Function to add task
     const handleAddTodo = () => {
       if (input.trim()) {
         dispatch(addTodo(input));

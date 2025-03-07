@@ -36,6 +36,7 @@ const TodoItem = ({ id, text, completed }) => {
           style: "cancel",
         },
         {
+           // delete task
           text: "Delete",
           style: "destructive",
           onPress: () => dispatch(deleteTodo(id)),

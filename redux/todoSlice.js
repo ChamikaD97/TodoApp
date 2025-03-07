@@ -11,7 +11,7 @@ const todoSlice = createSlice({
         id: Date.now(), // Unique ID based on timestamp
         text: action.payload,
         completed: false,
-        createdAt: Date.now(), // Ensure sorting works
+        createdAt: Date.now(), 
       });
     },
     
