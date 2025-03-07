@@ -7,12 +7,14 @@ const todoSlice = createSlice({
   },
   reducers: {
     addTodo: (state, action) => {
-      state.todos.push({
+      state.todos.unshift({
         id: Date.now(), // Unique ID based on timestamp
         text: action.payload,
         completed: false,
+        createdAt: Date.now(), // Ensure sorting works
       });
     },
+    
     toggleTodoCompletion: (state, action) => {
       const todo = state.todos.find((todo) => todo.id === action.payload);
       if (todo) todo.completed = !todo.completed;

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
   Text,
-  StyleSheet,
   KeyboardAvoidingView,
   Platform,
   Animated,
-  View,
   BackHandler,
   Alert,
   TouchableOpacity,
@@ -16,6 +14,7 @@ import store, { saveTodos, loadTodos } from "./redux/store";
 import TodoList from "./components/TodoList";
 import { setTodos } from "./redux/todoSlice";
 import TaskInput from "./components/TaskInput";
+import { styles } from "./stylesApp"; // Import styles
 
 const App = () => {
   const dispatch = useDispatch();
@@ -64,16 +63,19 @@ const App = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <LinearGradient colors={["#4a00e0", "#8e2de2"]} style={styles.header}>
-        <Animated.View style={{ opacity: fadeAnim }}>
+        <Animated.View style={[styles.headerContent, { opacity: fadeAnim }]}>
           <Text style={styles.headerText}>Todo Master</Text>
           <Text style={styles.sloganText}>Your Productivity, Simplified</Text>
         </Animated.View>
       </LinearGradient>
+
       <TaskInput />
       <TodoList />
-      <TouchableOpacity style={styles.exitButton} onPress={handleExit}>
-        <Text style={styles.exitButtonText}>Exit App</Text>
-      </TouchableOpacity>
+      <Animated.View style={[styles.inputContainer, { opacity: fadeAnim }]}>
+        <TouchableOpacity style={styles.exitButton} onPress={handleExit}>
+          <Text style={styles.exitButtonText}>Exit</Text>
+        </TouchableOpacity>
+      </Animated.View>
     </KeyboardAvoidingView>
   );
 };
@@ -83,49 +85,5 @@ const MainApp = () => (
     <App />
   </Provider>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f0f2f5",
-  },
-  header: {
-    paddingBottom: 50,
-    padding: 20,
-    paddingTop: 50,
-    alignItems: "center",
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    elevation: 5,
-  },
-  headerText: {
-    color: "#fff",
-    fontSize: 28,
-    fontWeight: "700",
-    letterSpacing: 1,
-  },
-  sloganText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "500",
-    marginTop: 5,
-    fontStyle: "italic",
-  },
-  exitButton: {
-    backgroundColor: "#e74c3c",
-    padding: 15,
-    marginHorizontal: 20,
-
-    marginVertical: 10,
-    borderRadius: 15,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  exitButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-});
 
 export default MainApp;

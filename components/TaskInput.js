@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
 import {
-  View,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
   Animated,
 } from "react-native";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import { loadTodos, saveTodos } from "../redux/store";
 import { addTodo } from "../redux/todoSlice";
 import { styles } from "../styles/stylesTaskInput"; // Import styles
 
-const TaskInput = ({ onAddTask }) => {
+const TaskInput = () => {
     const [input, setInput] = useState("");
     const dispatch = useDispatch();
     const todos = useSelector((state) => state.todos.todos);

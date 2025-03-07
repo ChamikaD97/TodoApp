@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { View, Text, TouchableOpacity, Animated, Alert } from "react-native";
+import { Text, TouchableOpacity, Animated, Alert } from "react-native";
 import { useDispatch } from "react-redux";
 import { toggleTodoCompletion, deleteTodo } from "../redux/todoSlice";
 import FontAwesome from "react-native-vector-icons/FontAwesome"; // Import FontAwesome icons
@@ -47,7 +47,10 @@ const TodoItem = ({ id, text, completed }) => {
 
   return (
     <Animated.View
-      style={[styles.container, { transform: [{ scale: scaleAnim }], opacity: opacityAnim }]}
+      style={[
+        styles.container,
+        { transform: [{ scale: scaleAnim }], opacity: opacityAnim },
+      ]}
     >
       {/* Checkbox Icon */}
       <TouchableOpacity
